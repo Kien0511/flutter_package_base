@@ -206,8 +206,10 @@ packages:
     dependency: "direct main"
     description:
       path: cupertino-date-picker
-      relative: true
-    source: path
+      ref: HEAD
+      resolved-ref: "1a227e9d8863c87e500cf3efd1affbb3ff88fe1d"
+      url: "https://github.com/phonex34/flutter_package_base"
+    source: git
     version: "1.0.26+2"
   flutter_spinkit:
     dependency: "direct main"
