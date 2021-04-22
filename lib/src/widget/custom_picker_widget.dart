@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_package_base/src/widget/ink_well_widget.dart';
-import 'package:get/get.dart';
 
 abstract class ValuePickerEntity {
   String labelString();
@@ -10,6 +9,7 @@ abstract class ValuePickerEntity {
 class CustomPickerWidget<T extends ValuePickerEntity> extends StatelessWidget {
   final T initialValue;
   final ValueChanged<T> onValueChange;
+  final VoidCallback onCancel;
   final List<T> values;
   final String title;
   final String textCancel;
@@ -26,7 +26,7 @@ class CustomPickerWidget<T extends ValuePickerEntity> extends StatelessWidget {
     this.canDeselected = true,
     this.textSettings = "設定",
     this.textCancel = "キャンセル",
-    this.textDeselected = "選択しない",
+    this.textDeselected = "選択しない", this.onCancel,
   }) : super(key: key);
 
   final defaultTextStyle = TextStyle(color: Colors.grey, fontSize: 16);
@@ -49,7 +49,7 @@ class CustomPickerWidget<T extends ValuePickerEntity> extends StatelessWidget {
       initialIndex = 0;
     }
 
-    var itemIndexSelected = initialIndex.obs;
+    var itemIndexSelected = initialIndex;
 
     return FractionallySizedBox(
       heightFactor: 0.8,
@@ -65,7 +65,7 @@ class CustomPickerWidget<T extends ValuePickerEntity> extends StatelessWidget {
                   left: 20,
                   child: CustomInkWell(
                       onTap: () {
-                        Get.back();
+                        onCancel?.call() ;
                       },
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -88,8 +88,7 @@ class CustomPickerWidget<T extends ValuePickerEntity> extends StatelessWidget {
                   right: 20,
                   child: CustomInkWell(
                       onTap: () {
-                        Get.back();
-                        onValueChange?.call(listData[itemIndexSelected.value]);
+                        onValueChange?.call(listData[itemIndexSelected]);
                       },
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -109,21 +108,21 @@ class CustomPickerWidget<T extends ValuePickerEntity> extends StatelessWidget {
                 backgroundColor: Colors.white,
                 itemExtent: 40,
                 scrollController:
-                    FixedExtentScrollController(initialItem: itemIndexSelected.value ?? 0),
+                    FixedExtentScrollController(initialItem: itemIndexSelected ?? 0),
                 onSelectedItemChanged: (item) {
-                  itemIndexSelected.value = item;
+                  itemIndexSelected = item;
                 },
                 children: List.generate(listData.length, (index) {
-                  return Obx(() => Container(
-                        alignment: Alignment.center,
-                        height: index == itemIndexSelected.value ? 60 : 40,
-                        child: Text(
-                          listData[index]?.labelString() ?? textDeselected,
-                          style: index == itemIndexSelected.value
-                              ? selectedTextStyle
-                              : defaultTextStyle,
-                        ),
-                      ));
+                  return Container(
+                    alignment: Alignment.center,
+                    height: index == itemIndexSelected ? 60 : 40,
+                    child: Text(
+                      listData[index]?.labelString() ?? textDeselected,
+                      style: index == itemIndexSelected
+                          ? selectedTextStyle
+                          : defaultTextStyle,
+                    ),
+                  );
                 })),
           ),
         ],

@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_package_base/src/widget/raised_gradient_button.dart';
-import 'package:get/get.dart';
 
 class MessageDialog extends StatelessWidget {
   final String text;
@@ -57,7 +56,6 @@ class MessageDialog extends StatelessWidget {
               ),
               RaisedGradientButton(
                 onPressed: () {
-                  Get.back();
                   onOk?.call();
                 },
                 gradient: LinearGradient(

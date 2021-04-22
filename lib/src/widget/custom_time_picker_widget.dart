@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_cupertino_date_picker/flutter_cupertino_date_picker.dart';
 import 'package:flutter_package_base/src/widget/ink_well_widget.dart';
-import 'package:get/get.dart';
 
 class CustomTimePickerWidget extends StatelessWidget {
   final ValueChanged<DateTime> onDateTimeChange;
+  final VoidCallback onCancel;
   final DateTime initialDate;
   final String title;
   final String textSettings;
@@ -22,7 +22,7 @@ class CustomTimePickerWidget extends StatelessWidget {
     @required this.title,
     this.textSettings = "設定",
     this.textCancel = "キャンセル",
-    this.dateFormat = "HH時,mm分",
+    this.dateFormat = "HH時,mm分", this.onCancel,
   }) : super(key: key);
 
   @override
@@ -49,7 +49,7 @@ class CustomTimePickerWidget extends StatelessWidget {
                   left: 20,
                   child: CustomInkWell(
                       onTap: () {
-                        Get.back();
+                        onCancel?.call();
                       },
                       child: Text(
                         textCancel,
@@ -69,7 +69,6 @@ class CustomTimePickerWidget extends StatelessWidget {
                   right: 20,
                   child: CustomInkWell(
                       onTap: () {
-                        Get.back();
                         onDateTimeChange?.call(_dateSelected);
                       },
                       child: Text(

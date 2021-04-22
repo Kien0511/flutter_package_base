@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_package_base/src/widget/ink_well_widget.dart';
-import 'package:get/get.dart';
 
 import 'package:flutter_cupertino_date_picker/flutter_cupertino_date_picker.dart';
 
 class CustomDatePickerWidget extends StatelessWidget {
   final ValueChanged<DateTime> onDateTimeChange;
+  final VoidCallback onCancel;
   final DateTime initialDate;
   final String title;
   final String textSettings;
@@ -25,7 +25,7 @@ class CustomDatePickerWidget extends StatelessWidget {
     this.maxDateTime,
     this.textSettings = "設定",
     this.textCancel = "キャンセル",
-    this.dateFormat = "yyyy年,MM月,dd日",
+    this.dateFormat = "yyyy年,MM月,dd日", this.onCancel,
   }) : super(key: key);
 
   final defaultTextStyle = TextStyle(color: Colors.grey, fontSize: 16);
@@ -52,7 +52,7 @@ class CustomDatePickerWidget extends StatelessWidget {
                   left: 20,
                   child: CustomInkWell(
                       onTap: () {
-                        Get.back();
+                        onCancel?.call();
                       },
                       child: Text(
                         textCancel,
@@ -72,7 +72,6 @@ class CustomDatePickerWidget extends StatelessWidget {
                   right: 20,
                   child: CustomInkWell(
                       onTap: () {
-                        Get.back();
                         onDateTimeChange?.call(_dateSelected);
                       },
                       child: Text(

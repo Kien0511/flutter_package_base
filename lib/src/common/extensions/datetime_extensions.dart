@@ -1,6 +1,4 @@
-import 'package:flutter_package_base/src/common/constants/app_constants.dart';
 import 'package:intl/intl.dart';
-import 'package:get/get.dart';
 
 extension DateTimeExtension on DateTime {
   String toDateString({String pattern = "yyyy年M月d日"}) {
@@ -79,31 +77,31 @@ extension DateTimeExtension on DateTime {
     return this;
   }
 
-  String getTimeToNow() {
+  String getTimeToNow({String minuteAgo = "分前", String dayAgo = "日前"}) {
     DateTime now = DateTime.now();
 
     var nowInMillis = now.millisecondsSinceEpoch;
     var dateInMillis  = this.millisecondsSinceEpoch;
 
     if (dateInMillis >= nowInMillis) {
-      return 0.toString() + 'minutes_ago'.tr;
+      return 0.toString() + minuteAgo;
     }
 
     var differenceTimeDuration = Duration(milliseconds: nowInMillis - dateInMillis);
 
     var diffInMin = differenceTimeDuration.inMinutes;
     if (diffInMin >= 0 && diffInMin < 60) {
-      return diffInMin.toString() + 'minutes_ago'.tr;
+      return diffInMin.toString() + minuteAgo;
     }
 
     var diffInHour = differenceTimeDuration.inHours;
     if (diffInHour >= 0 && diffInHour < 24) {
-      return diffInHour.toString() + 'hours_ago'.tr;
+      return diffInHour.toString() + minuteAgo;
     }
 
     var diffInDays = differenceTimeDuration.inDays;
     if (diffInDays >= 0 && diffInDays <= 30) {
-      return diffInDays.toString() + 'days_ago'.tr;
+      return diffInDays.toString() + dayAgo;
     }
 
     return this.toDateString();

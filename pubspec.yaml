@@ -13,7 +13,6 @@ dependencies:
     sdk: flutter
 
   dio: ^3.0.10
-  get: ^3.24.0
   intl: ^0.16.0
 
   #Logger
@@ -30,10 +29,6 @@ dependencies:
     git:
       url: https://github.com/phonex34/flutter_package_base
       path: cupertino-date-picker
-
-  cached_network_image: ^2.5.0
-
-  flutter_svg: ^0.18.1
 
   flutter_spinkit: ^4.1.2+1
 
