@@ -4,6 +4,7 @@ export 'src/widget/ink_well_widget.dart';
 export 'src/widget/custom_date_picker_widget.dart';
 export 'src/widget/custom_scroll_behavior.dart';
 export 'src/widget/custom_time_picker_widget.dart';
+export 'src/widget/custom_picker_widget.dart';
 export 'src/widget/infinity_page_view.dart';
 export 'src/widget/raised_gradient_button.dart';
 export 'src/widget/replace_space_input_formatter.dart';
