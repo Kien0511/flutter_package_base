@@ -27,7 +27,9 @@ dependencies:
 
   #cupertino picker
   flutter_cupertino_date_picker:
-    path: cupertino-date-picker
+    git:
+      url: https://github.com/phonex34/flutter_package_base
+      path: cupertino-date-picker
 
   cached_network_image: ^2.5.0
 
